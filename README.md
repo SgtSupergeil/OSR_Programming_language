@@ -11,4 +11,8 @@ syntax errors will only be detected at runtime
 when the interpreter arrives at the line. Debugging 
 and exception handling is implemented.
 
-Currently OSR features 23 instrucions
+Currently OSR features 24 instrucions
+
+## Todo
+
+- [ ] Better stack handling
