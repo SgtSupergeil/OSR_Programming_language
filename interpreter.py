@@ -1,13 +1,20 @@
 from random import randint,random
 from sys import argv
 
-#This is the official interpreter for OSR! 
+#This is the official interpreter for OSR!
+
+
+#define regisers,stack and the valid instructions, all other instructions will be bocked
 
 registers =  {'R0':0,'R1':0,'R2':0,'R3':0,'ACC':0,'CMP':0}
 stack = []
 instruction_set = ['MOV','ADD','SUB','MUL','DIV','CMP','JMP','JE','JNE','JGE','JLE','JG','JL','PSH','POP','PSS','PSI','REI','RES','EXT','RNI','PS','PI']
 
 def special_split(string):
+
+    #Sperate line by spaces but also watch out for user defined strings:
+    #123 "string with spaces" ACC => ["123","string with spaces","ACC"]
+
     out = []
     tmp = ''
     string_trigger = False
@@ -18,10 +25,12 @@ def special_split(string):
             tmp = ''
         if x == '"':
             if string_trigger:
+                #string is closed
                 string_trigger = False
                 out.append(tmp+'"')
                 tmp = ''
             else:
+                #string is opened
                 string_trigger = True
                 tmp += '"'
         else:
@@ -31,6 +40,10 @@ def special_split(string):
     return [x.strip() for x in out if x.strip()]
 
 def get_true_value(string):
+
+    #convert all tokens in line to their real values:
+    #for example: ACC = 0; R0 = 42
+    #ACC "string test" R0 => [0,"string test",42]
 
     if string in instruction_set:
         return string
@@ -62,6 +75,11 @@ def get_true_value(string):
                 raise ValueError('Invalid token: {} could not be parsed'.format(string))
 
 def intlist_to_string(intlist):
+
+    #convert a list of ints to a string
+    #ignore unprintables
+    #usefull when printing stack as a string
+
     out = ''
 
     for x in intlist:
@@ -82,11 +100,13 @@ def run(code,debug=0):
         while True:
 
             if linecount >= len(lines):
+                #we reached the end
                 break
 
             line = lines[linecount]
 
             if not line or line.startswith('//'):
+                #ignore empty lines and comments
                 linecount += 1
                 continue
 
