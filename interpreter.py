@@ -10,6 +10,7 @@ registers =  {'R0':0,'R1':0,'R2':0,'R3':0,'ACC':0,'CMP':0}
 stack = []
 instruction_set = ['MOV','ADD','SUB','MUL','DIV','CMP','JMP','JE','JNE','JGE','JLE','JG','JL','PSH','POP','PSS','PSI','REI','RES','EXT','RNI','PS','PI','SET']
 
+
 def special_split(string):
 
     #Sperate line by spaces but also watch out for user defined strings:
@@ -50,6 +51,19 @@ def get_true_value(string):
 
     if string[0] == '"' and string[-1] == '"':
         return string[1:-1]
+
+    if string[0:3] == 'STK' and string[-1] == ']' and string[3] == '[':
+        val = string.split('[')[-1].split(']')[0]
+
+        try:
+            int(val)
+        except:
+            raise TypeError('A stack index must be an int')
+
+        try:
+            return stack[int(val)]
+        except:
+            raise ValueError('Stack index out of bounds')
 
     if string == 'R0':
         return registers['R0']
