@@ -56,12 +56,12 @@ def get_true_value(string):
         val = string.split('[')[-1].split(']')[0]
 
         try:
-            int(val)
+            int(get_true_value(val))
         except:
             raise TypeError('A stack index must be an int')
 
         try:
-            return stack[int(val)]
+            return stack[int(get_true_value(val))]
         except:
             raise ValueError('Stack index out of bounds')
 
@@ -78,8 +78,8 @@ def get_true_value(string):
     else:
         if  string[0] == '+': # relative jumps
             try:
-                float(string[1:])
-                return string
+                rel_jmp = int(get_true_value(string[1:]))
+                return '+'+str(rel_jmp)
             except:
                 pass
         else:
