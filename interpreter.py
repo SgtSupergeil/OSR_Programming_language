@@ -118,6 +118,7 @@ def run(code,debug=0):
                 break
 
             line = lines[linecount]
+            debug_linecount = linecount
 
             if not line or line.startswith('//'):
                 #ignore empty lines and comments
@@ -127,7 +128,7 @@ def run(code,debug=0):
             arguments = special_split(line)
             arguments_nums = [get_true_value(x) for x in arguments]
             instruction = arguments[0]
-            debug_linecount = linecount
+
 
 
             if instruction == 'MOV':
