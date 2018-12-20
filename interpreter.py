@@ -8,7 +8,7 @@ from sys import argv
 
 registers =  {'R0':0,'R1':0,'R2':0,'R3':0,'ACC':0,'CMP':0}
 stack = []
-instruction_set = ['MOV','ADD','SUB','MUL','DIV','CMP','JMP','JE','JNE','JGE','JLE','JG','JL','PSH','POP','PSS','PSI','REI','RES','EXT','RNI','PS','PI','SET']
+instruction_set = ['MOV','ADD','SUB','MUL','DIV','OR','AND','XOR','NOT','RSH','LSH','CMP','JMP','JE','JNE','JGE','JLE','JG','JL','PSH','POP','PSS','PSI','REI','RES','EXT','RNI','PS','PI','SET']
 
 
 def special_split(string):
@@ -157,6 +157,35 @@ def run(code,debug=0):
 
                 value  = arguments_nums[1]
                 registers['ACC'] = registers['ACC'] / value
+
+            if instruction == 'OR':
+
+                value  = arguments_nums[1]
+                registers['ACC'] = float(int(registers['ACC']) | int(value))
+
+            if instruction == 'AND':
+
+                value  = arguments_nums[1]
+                registers['ACC'] = float(int(registers['ACC']) & int(value))
+
+            if instruction == 'XOR':
+
+                value  = arguments_nums[1]
+                registers['ACC'] = float(int(registers['ACC']) ^ int(value))
+
+            if instruction == 'NOT':
+
+                registers['ACC'] = float(~int(registers['ACC']))
+
+            if instruction == 'RSH':
+
+                value  = arguments_nums[1]
+                registers['ACC'] = float(int(registers['ACC']) >> int(value))
+
+            if instruction == 'LSH':
+
+                value  = arguments_nums[1]
+                registers['ACC'] = float(int(registers['ACC']) << int(value))
 
             if instruction == 'CMP':
 
