@@ -1,0 +1,42 @@
+//let user view and edit the stack
+PS "WELCOME TO THE STACK VIEWER\n"
+PS "PLEASE MAKE A CHOICE\n"
+PS "1: SHOW STACK\n"
+PS "2: PUSH TO THE STACK\n"
+PS "3: POP FROM THE STACK\n"
+PS "4: SHOW A CERTAIN INDEX\n"
+PS ">"
+
+REI R0
+CMP 1 R0
+JE 39
+CMP 2 R0
+JE 34
+CMP 3 R0
+JE 28
+CMP 4 R0
+JE 19
+JMP 3
+//choice 4
+PS "INDEX>"
+REI R1
+PS "STACK AT INDEX "
+PI R1
+PS " : "
+PI STK[R1]
+PS "\n"
+JMP 3
+//choice 3
+PS "POPED "
+POP R1
+PI R1
+PS "\n"
+JMP 3
+//choice 2
+PS "PUSH>"
+REI R1
+PSH R1
+JMP 3
+// choice 1
+PSI
+JMP 3
