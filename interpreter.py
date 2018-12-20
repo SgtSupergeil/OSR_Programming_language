@@ -264,10 +264,21 @@ def run(code,debug=0):
             if instruction == 'PSI':
                 #print stack int
 
-                valuea = int(arguments_nums[1])
-                valueb = int(arguments_nums[2])
+                n_args = len(arguments_nums)-1
 
-                stack_nums = stack[valuea:valueb]
+                if n_args == 0:
+                    stack_nums = stack
+
+                if n_args == 1:
+
+                    valuea = int(arguments_nums[1])
+                    stack_nums = stack[valuea:]
+
+                if n_args == 2:
+                    valuea = int(arguments_nums[1])
+                    valueb = int(arguments_nums[2])
+                    stack_nums = stack[valuea:]
+
 
                 print(' '.join([str(x) for x in stack_nums]))
 
