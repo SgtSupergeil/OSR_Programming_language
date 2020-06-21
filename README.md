@@ -1,9 +1,9 @@
-# OSR_Programming_language
+# OSR Programming language
 
 OSR stands for "Only six registers!" and
 is a dynamically interpreted assembly like
-language. Instead of variables it has a stack
-and 6 registers which 4 of them are multi purpose,
+language. It has a stack
+and 6 registers which 4 of them being multi purpose,
 1 (ACC) being the register for math operations and
 the last one (CMP) being for comparison operations.
 The code is read line by line and because of that,
